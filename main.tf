@@ -25,7 +25,6 @@ variable "attendee_usernames" {
   type = list(string)
 
   default = [
-    "rastley",
     "rreynolds"
   ]
 }
@@ -36,8 +35,8 @@ locals {
 }
 
 
-module "vsftpd234-lab" {
-    source = "./modules/vsftpd234-lab"
+module "autopsy-lab" {
+    source = "./modules/autopsy-lab"
     for_each = local.attendee_index_map
 
     attendee_number = each.value
