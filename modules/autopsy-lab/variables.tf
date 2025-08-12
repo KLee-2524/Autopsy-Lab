@@ -40,7 +40,7 @@ variable "setup_script" {
     default     = <<-EOT
     <powershell>
     $autopsy_installer = "https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.22.1/autopsy-4.22.1-64bit.msi"
-    $installer_path = "C:\Users\Administrator\Download\autopsy-4.22.1-64bit.msi"
+    $installer_path = "C:\Users\Administrator\Downloads\autopsy-4.22.1-64bit.msi"
 
     Start-Process $autopsy_installer -Wait
     Start-Process msiexec.exe "/i $installer_path /qn" -Wait
