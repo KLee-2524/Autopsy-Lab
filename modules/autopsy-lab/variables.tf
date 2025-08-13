@@ -40,10 +40,15 @@ variable "setup_script" {
     default     = <<-EOT
     <powershell>
     $autopsy_installer = "https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.22.1/autopsy-4.22.1-64bit.msi"
-    $installer_path = "C:\Users\Administrator\Downloads\autopsy-4.22.1-64bit.msi"
+    $autopsy_path = "C:\Users\Administrator\Downloads\autopsy-4.22.1-64bit.msi"
+    $java_installer = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=247245_4d245f6b5236a7c8b0a3d1d2e0c6f3b8"
+    $java_path = "C:\\Users\\Administrator\\Downloads\\jre-installer.exe"
+    
+    Invoke-WebRequest -Uri $java_installer -OutFile $java_path
+    Start-Process -FilePath $java_path -ArgumentList "/s" -Wait
 
-    Invoke-WebRequest -Uri $autopsy_installer -OutFile $installer_path
-    Start-Process msiexec.exe -ArgumentList "/i $installer_path /qn" -Wait
+    Invoke-WebRequest -Uri $autopsy_installer -OutFile $autopsy_path
+    Start-Process msiexec.exe -ArgumentList "/i $autopsy_path /qn" -Wait
     </powershell>
     EOT
 }
