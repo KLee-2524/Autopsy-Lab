@@ -36,13 +36,16 @@ resource "aws_security_group" "FAST-sg" {
 }
 
 resource "aws_instance" "autopsy-vm" {
-  ami           = var.windows_ami
-  instance_type = var.instance_type
-  subnet_id     = aws_subnet.FAST-subnet.id
-
-  private_ip = "192.168.${var.attendee_number}.10"
-  
+  ami                    = var.windows_ami
+  instance_type          = var.instance_type
+  subnet_id              = aws_subnet.FAST-subnet.id
+  private_ip             = "192.168.${var.attendee_number}.10"
   vpc_security_group_ids = [aws_security_group.FAST-sg.id]
+  
+  root_block_device {
+    volume_size           = 60
+    delete_on_termination = true
+  }
 
   user_data = var.setup_script
 
